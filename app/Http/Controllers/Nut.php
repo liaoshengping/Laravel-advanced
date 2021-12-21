@@ -8,6 +8,8 @@ class Nut
 {
     public $express;
 
+    public $data;
+
     public function __construct(\App\Contracts\Express $express)
     {
 
@@ -18,7 +20,7 @@ class Nut
     public function get()
     {
 
-        return $this->express->getAmount();
+        return $this->data;
 
     }
 }
