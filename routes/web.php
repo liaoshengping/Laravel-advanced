@@ -19,3 +19,9 @@ Route::get('/', function () {
 
 Route::get('fruit',[\App\Http\Controllers\Fruit::class,'get']);
 Route::get('nut',[\App\Http\Controllers\Nut::class,'get']);
+
+
+/**
+ * 宏的运用
+ */
+Route::get('eat',[\App\Http\Controllers\Eat::class,'eat']);

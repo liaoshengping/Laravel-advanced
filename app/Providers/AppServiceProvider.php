@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use App\Contracts\Express;
 use App\Http\Controllers\Nut;
+use App\Services\Eat;
 use App\Services\express\Shunfeng;
 use App\Services\express\Yuantong;
 use Illuminate\Support\ServiceProvider;
@@ -17,6 +18,9 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
+
+        $this->app->singleton('eat', Eat::class);
+
 
         $this->app->when('App\Http\Controllers\Fruit')
             ->needs(Express::class)
@@ -33,7 +37,7 @@ class AppServiceProvider extends ServiceProvider
 
         });
 
-        $this->app->resolving('setDefaultConnection',function ($db,$app){
+        $this->app->resolving('setDefaultConnection', function ($db, $app) {
             $db->setDefaultConnection('ConnectionName');
         });
 
@@ -45,6 +49,7 @@ class AppServiceProvider extends ServiceProvider
 
         });
 
+
     }
 
     /**
@@ -54,6 +59,10 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        $eat = $this->app->make('eat');
+
+        $eat->macro('fan', function () {
+            echo '吃饭';
+        });
     }
 }
